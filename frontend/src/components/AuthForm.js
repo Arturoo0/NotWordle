@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { post } from '../utils/baseRequest.js';
 
 const AuthForm = () => {
     const [ email, setEmail ] = useState(null);
     const [ username, setUsername ] = useState(null);
     const [ password, setPassword ] = useState(null);
+    const [ authType, setAuthType ] = useState('login');
 
     const handleUserSumbmission = () => {
+        const userCredentials = { 
+            'email' : email, 
+            'username': username, 
+            'password': password
+        }
+        switch (authType){
+            case 'login':
+                post('/auth/login', userCredentials);
+                break;
+            case 'signup':
+                post('/auth/signup', userCredentials);
+                break;
+        }
         return null;
     };
 
@@ -32,6 +47,10 @@ const AuthForm = () => {
 
     return (
         <div>
+            <Form.Select onChange={(event) => setAuthType(event.target.value)}>
+                <option value='login'>Login</option>
+                <option value='signup'>Signup</option>
+            </Form.Select>
             {renderFormInputs()}
             <p/>
             <Button 
