@@ -27,6 +27,7 @@ const AuthForm = () => {
     return (
         <div>
             {renderFormInputs()}
+            <p/>
             <button onClick={() => { handleUserSumbmission() }}>Submit</button>
         </div>
     )
