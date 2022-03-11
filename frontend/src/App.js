@@ -1,7 +1,10 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Auth from './pages/Auth.js';
+
 function App() {
   return (
-    <div className="App">
-      testing react app
+    <div>
+      <Auth />
     </div>
   );
 }
