@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 
 const AuthForm = () => {
     const [ email, setEmail ] = useState(null);
@@ -17,8 +18,13 @@ const AuthForm = () => {
         ];
         const inputs = inputTypes.map((inputType) =>
             <div>
-                <p>{inputType.credential}</p>
-                <input onChange={(event) => inputType.update(event.target.value) }></input>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>{inputType.credential}</Form.Label>
+                    <Form.Control 
+                        placeholder={`Enter ${inputType.credential}`} 
+                        onChange={(event) => inputType.update(event.target.value) }
+                    />
+                </Form.Group>
             </div>
         );
         return inputs;
@@ -28,7 +34,10 @@ const AuthForm = () => {
         <div>
             {renderFormInputs()}
             <p/>
-            <button onClick={() => { handleUserSumbmission() }}>Submit</button>
+            <Button 
+                variant="primary" 
+                onClick={() => {handleUserSumbmission()}}
+            >Submit</Button>{' '}
         </div>
     )
 };
