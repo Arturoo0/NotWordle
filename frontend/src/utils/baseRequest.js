@@ -24,7 +24,10 @@ const get = async (endpoint, body) => {
         });
         return res;
     }catch(err){
-        console.log(err);
+        return {
+            status: err.response.status,
+            errRes: err.response.data
+        }
     }
 }
 
@@ -43,7 +46,6 @@ const post = async (endpoint, body) => {
         });
         return res;
     } catch(err) {
-        console.log(err);
         return {
             status: err.response.status,
             errRes: err.response.data
