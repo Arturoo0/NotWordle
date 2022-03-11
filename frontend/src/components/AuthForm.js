@@ -8,20 +8,23 @@ const AuthForm = () => {
     const [ password, setPassword ] = useState(null);
     const [ authType, setAuthType ] = useState('login');
 
-    const handleUserSumbmission = () => {
+    const handleUserSumbmission = async () => {
         const userCredentials = { 
             'email' : email, 
             'username': username, 
             'password': password
         }
+        let res;
         switch (authType){
             case 'login':
-                post('/auth/login', userCredentials);
+                res = await post('/auth/login', userCredentials);
                 break;
             case 'signup':
-                post('/auth/signup', userCredentials);
+                res = await post('/auth/sign-up', userCredentials);
                 break;
         }
+        const { error, message } = res.data;
+        (error) ? alert(error) : alert(message);  
         return null;
     };
 
