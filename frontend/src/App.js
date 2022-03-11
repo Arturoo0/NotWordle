@@ -1,7 +1,9 @@
+import { AuthForm } from "./components";
+
 function App() {
   return (
-    <div className="App">
-      testing react app
+    <div>
+      <AuthForm />
     </div>
   );
 }
