@@ -1,14 +1,44 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Auth from './pages/Auth.js';
+import { get } from './utils/baseRequest.js';
+import { useState, useEffect } from 'react';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [username, setUsername] = useState(null);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const response = await get('/auth/is-valid-session', {});
+      const { username, isValidSession } = response.data;
+      setLoggedIn(isValidSession);
+      setUsername(username); 
+    }
+    checkAuth();
+  }, []);
+
+  const renderWebPage = () => {
+    if (loggedIn){
+      return (
+        <BrowserRouter>
+          <Routes>
+            <Route path='/'/>
+          </Routes>
+        </BrowserRouter>
+      );
+    }
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Auth />} />
+        </Routes>
+      </BrowserRouter>
+    );
+  }
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Auth />} />
-      </Routes>
-    </BrowserRouter>
+    renderWebPage()
   );
 }
 
