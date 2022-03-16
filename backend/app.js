@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const fileReader = require('fs');
 
 const authRouter = require('./routes/auth.js');
+const wordRouter = require('./routes/words.js')
 const appStartTime = Date.now();
 
 let words = null;
@@ -22,11 +23,11 @@ const appCore = async () => {
   }
 };
 
-const wordStore = async () => {
+const wordStore = () => {
   console.log('Digesting word store...');
   try {
-    const readFile = await fileReader.readFileSync('sgb-words.txt', 'utf-8');
-    const words = await readFile.split('\n');
+    const readFile = fileReader.readFileSync('sgb-words.txt', 'utf-8');
+    words = readFile.split('\n');
     console.log('Finished digesting word store.');
   }catch (error) {
     console.log('Failed to digest words .txt in ./backend');
@@ -36,7 +37,6 @@ const wordStore = async () => {
 
 const startApp = async (words) => {
   await appCore();
-  await wordStore();
 
   const port = 3000;
   const app = express();
@@ -52,6 +52,7 @@ const startApp = async (words) => {
   app.use(express.json()); 
 
   app.use('/auth', authRouter);
+  app.use('/words', wordRouter);
 
   app.get('/', (req, res) => {
     const status = {
@@ -66,3 +67,5 @@ const startApp = async (words) => {
 }
 
 startApp();
+
+module.exports = words;
