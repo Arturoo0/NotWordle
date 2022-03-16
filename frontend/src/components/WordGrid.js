@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Container, Col, Row, Form } from 'react-bootstrap';
 
 const WordGrid = () => {
+    const [currentWordEntry, setCurrentWordEntry] = useState(null);
+    const [ enteredWords, setEnteredWords ] = useState(null);
     const gridStyle = {
         display: 'flex',
         flexDirection: 'column',
@@ -39,7 +41,9 @@ const WordGrid = () => {
     return (
         <div style={gridStyle}>
             {renderRows()}
-            <Form.Control />
+            <Form.Control onChange={(event) => {
+                setCurrentWordEntry(event.target.value);
+            }} />
             <Form.Text muted>
                 Enter your word guess.
             </Form.Text>
