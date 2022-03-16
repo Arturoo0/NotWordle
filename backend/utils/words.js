@@ -5,6 +5,8 @@ const wordStore = () => {
     try {
       const readFile = fileReader.readFileSync('sgb-words.txt', 'utf-8');
       const words = readFile.split('\n');
+      const setOfWords = new Set();
+      words.forEach((word) => setOfWords.add(word));
       console.log('Finished digesting word store.');
       return words;
     }catch (error) {
@@ -13,5 +15,11 @@ const wordStore = () => {
     }
 };
   
-const words = wordStore();
-module.exports = words;
+const arrayOfWords = wordStore();
+const setOfWords = new Set();
+arrayOfWords.forEach((word) => setOfWords.add(word));
+
+module.exports = {
+  arrayOfWords,
+  setOfWords
+};

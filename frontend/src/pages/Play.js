@@ -12,7 +12,9 @@ const Play = () => {
 
     return (
         <div style={playContainerStyle}>
-            <WordGrid />
+            <WordGrid config={{
+                wordLength: 5
+            }}/>
         </div>
     );
 };

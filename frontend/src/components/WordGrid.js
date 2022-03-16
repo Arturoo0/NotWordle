@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Container, Col, Row, Form } from 'react-bootstrap';
 
-const WordGrid = () => {
+const WordGrid = (props) => {
     const [currentWordEntry, setCurrentWordEntry] = useState(null);
-    const [ enteredWords, setEnteredWords ] = useState(null);
+    const [enteredWords, setEnteredWords] = useState(null);
     const gridStyle = {
         display: 'flex',
         flexDirection: 'column',
@@ -29,10 +29,11 @@ const WordGrid = () => {
     }
 
     const renderRows = () => {
-        const rowLetters = [1, 2, 3, 4, 5].map((row) => 
+        const { wordLength } = props.config; 
+        const rowLetters = [...Array(wordLength)].map((row) => 
             <div style={rowLetter}>-</div>
         );
-        const rows = [1, 2, 3, 4, 5, 6].map((row) => 
+        const rows = [...Array(6)].map((row) => 
             <div style={rowStyle}>{rowLetters}</div>
         );
         return rows;
