@@ -4,13 +4,11 @@ const cors = require('cors');
 const express = require('express'); 
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-const fileReader = require('fs');
+const words = require('./utils/words.js');
 
 const authRouter = require('./routes/auth.js');
 const wordRouter = require('./routes/words.js')
 const appStartTime = Date.now();
-
-let words = null;
 
 const appCore = async () => {
   console.log('Connecting to mongo instance...');
@@ -23,19 +21,7 @@ const appCore = async () => {
   }
 };
 
-const wordStore = () => {
-  console.log('Digesting word store...');
-  try {
-    const readFile = fileReader.readFileSync('sgb-words.txt', 'utf-8');
-    words = readFile.split('\n');
-    console.log('Finished digesting word store.');
-  }catch (error) {
-    console.log('Failed to digest words .txt in ./backend');
-    process.exit(1);
-  }
-};
-
-const startApp = async (words) => {
+const startApp = async () => {
   await appCore();
 
   const port = 3000;
@@ -68,4 +54,3 @@ const startApp = async (words) => {
 
 startApp();
 
-module.exports = words;

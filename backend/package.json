@@ -16,6 +16,8 @@
     "express": "^4.17.1",
     "joi": "^17.5.0",
     "mongoose": "^6.0.13",
+    "node-cache": "^5.1.2",
+    "node-localstorage": "^2.2.1",
     "uuid": "^8.3.2"
   }
 }
