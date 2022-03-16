@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Container, Col, Row, Form } from 'react-bootstrap';
+import { Container, Col, Row, Form, Button } from 'react-bootstrap';
+import { get } from '../utils/baseRequest.js';
 
 const WordGrid = (props) => {
     const [currentWordEntry, setCurrentWordEntry] = useState(null);
@@ -39,15 +40,22 @@ const WordGrid = (props) => {
         return rows;
     };
 
+    const handleWordInput = (event) => {
+        setCurrentWordEntry(event.target.value);
+    };
+
+    const handleWordSubmit = async () => {
+        const response = await get(`/words/is-valid-word/${currentWordEntry}`, {});
+    }
+
     return (
         <div style={gridStyle}>
             {renderRows()}
-            <Form.Control onChange={(event) => {
-                setCurrentWordEntry(event.target.value);
-            }} />
+            <Form.Control onChange={handleWordInput} />
             <Form.Text muted>
                 Enter your word guess.
             </Form.Text>
+            <Button onClick={handleWordSubmit} style={{marginTop: '4px'}}>Submit</Button>
         </div>
     );
 }
