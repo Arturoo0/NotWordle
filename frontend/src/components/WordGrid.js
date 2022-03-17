@@ -91,13 +91,13 @@ const WordGrid = (props) => {
     const renderWordInput = () => {
         if (isCurrentGame){
             return (
-                <div>
+                <>
                     <Form.Control style={{marginTop: '4px'}} maxLength={10} onChange={handleWordInput} />
                     <Form.Text muted>
                         Enter your word guess.
                     </Form.Text>
                     <Button onClick={handleWordSubmit} style={{marginTop: '4px'}}>Submit</Button>
-                </div>
+                </>
             );
         }
     }
