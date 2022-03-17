@@ -5,6 +5,9 @@ import { get } from '../utils/baseRequest.js';
 const WordGrid = (props) => {
     const [currentWordEntry, setCurrentWordEntry] = useState(null);
     const [enteredWords, setEnteredWords] = useState([]);
+    const [isCurrentGame, setIsCurrentGame] = useState(true);
+    const [isWinner, setIsWinner] = useState(false);
+    const { targetWord } = props.config;
     const gridStyle = {
         display: 'flex',
         flexDirection: 'column',
@@ -35,7 +38,6 @@ const WordGrid = (props) => {
     }
 
     const wordBlock = (letter, targetIndex) => {
-        const { targetWord } = props.config;
         if (targetWord[targetIndex] === letter){
             return <div style={setLetterStyling('green')}>{letter}</div>;
         }else if (targetWord.includes(letter)){
@@ -67,22 +69,44 @@ const WordGrid = (props) => {
             alert('Provided word is greater than 5 characters');
             return;
         }
+        if (targetWord === currentWordEntry){
+            setIsCurrentGame(false);
+            isWinner(true);
+            return;
+        }
         const response = await get(`/words/is-valid-word/${currentWordEntry}`, {});
         if (!response.data){
             alert('Provided word is not in the word list')
         }else if (enteredWords.length < 6){
             setEnteredWords([...enteredWords, ...[currentWordEntry]]);
+        }else{
+            setIsCurrentGame(false);
+        }
+    }
+
+    const renderPostGame = () => {
+        if (!isCurrentGame) return <Button>Next</Button>
+    };
+
+    const renderWordInput = () => {
+        if (isCurrentGame){
+            return (
+                <div>
+                    <Form.Control style={{marginTop: '4px'}} maxLength={10} onChange={handleWordInput} />
+                    <Form.Text muted>
+                        Enter your word guess.
+                    </Form.Text>
+                    <Button onClick={handleWordSubmit} style={{marginTop: '4px'}}>Submit</Button>
+                </div>
+            );
         }
     }
 
     return (
         <div style={gridStyle}>
             {renderRows()}
-            <Form.Control style={{marginTop: '4px'}} maxLength={10} onChange={handleWordInput} />
-            <Form.Text muted>
-                Enter your word guess.
-            </Form.Text>
-            <Button onClick={handleWordSubmit} style={{marginTop: '4px'}}>Submit</Button>
+            {renderWordInput()}
+            {renderPostGame()}
         </div>
     );
 }
