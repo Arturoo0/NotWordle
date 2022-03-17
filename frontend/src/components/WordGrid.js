@@ -4,7 +4,7 @@ import { get } from '../utils/baseRequest.js';
 
 const WordGrid = (props) => {
     const [currentWordEntry, setCurrentWordEntry] = useState(null);
-    const [enteredWords, setEnteredWords] = useState(null);
+    const [enteredWords, setEnteredWords] = useState([]);
     const gridStyle = {
         display: 'flex',
         flexDirection: 'column',
@@ -29,13 +29,17 @@ const WordGrid = (props) => {
         padding: '0 13px'
     }
 
+    const renderRow = (word) => {
+        const rowLetters = word.split('').map((letter) => 
+            <div style={rowLetter}>{letter}</div>
+        );
+        return rowLetters;
+    }
+
     const renderRows = () => {
         const { wordLength } = props.config; 
-        const rowLetters = [...Array(wordLength)].map((row) => 
-            <div style={rowLetter}>-</div>
-        );
-        const rows = [...Array(6)].map((row) => 
-            <div style={rowStyle}>{rowLetters}</div>
+        const rows = enteredWords.map((word) => 
+            <div style={rowStyle}>{renderRow(word)}</div>
         );
         return rows;
     };
@@ -45,13 +49,22 @@ const WordGrid = (props) => {
     };
 
     const handleWordSubmit = async () => {
+        if (currentWordEntry.length > 5){
+            alert('Provided word is greater than 5 characters');
+            return;
+        }
         const response = await get(`/words/is-valid-word/${currentWordEntry}`, {});
+        if (!response.data){
+            alert('Provided word is not in the word list')
+        }else if (enteredWords.length < 6){
+            setEnteredWords([...enteredWords, ...[currentWordEntry]]);
+        }
     }
 
     return (
         <div style={gridStyle}>
             {renderRows()}
-            <Form.Control onChange={handleWordInput} />
+            <Form.Control maxLength={10} onChange={handleWordInput} />
             <Form.Text muted>
                 Enter your word guess.
             </Form.Text>
