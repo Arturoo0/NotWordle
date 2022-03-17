@@ -4,7 +4,8 @@ const wordsRouter = express.Router();
 const words = require('../utils/words.js');
 
 wordsRouter.get('/word', (req, res) => {
-    const word = words.arrayOfWords[Math.floor(Math.random() * words.length)];
+    const arrayOfWords = words.arrayOfWords;
+    const word = arrayOfWords[Math.floor(Math.random() * arrayOfWords.length)];
     return res.send(word);
 });
 

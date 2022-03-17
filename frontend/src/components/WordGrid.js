@@ -18,6 +18,7 @@ const WordGrid = (props) => {
 
     const setLetterStyling = (backColor) => {
         return {
+            fontFamily: 'monospace',
             alignItems: 'center',
             display: 'flex',
             fontSize: '32px',
@@ -28,12 +29,12 @@ const WordGrid = (props) => {
             border: '2px solid hsla(0,0%,100%,.4)',
             color: '#cdcdcd',
             padding: '0 13px',
+            margin: '5px 7px',
             backgroundColor: `${backColor}`
         }
     }
 
     const wordBlock = (letter, targetIndex) => {
-        console.log(letter);
         const { targetWord } = props.config;
         if (targetWord[targetIndex] === letter){
             return <div style={setLetterStyling('green')}>{letter}</div>;
@@ -77,7 +78,7 @@ const WordGrid = (props) => {
     return (
         <div style={gridStyle}>
             {renderRows()}
-            <Form.Control maxLength={10} onChange={handleWordInput} />
+            <Form.Control style={{marginTop: '4px'}} maxLength={10} onChange={handleWordInput} />
             <Form.Text muted>
                 Enter your word guess.
             </Form.Text>
