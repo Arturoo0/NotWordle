@@ -16,22 +16,36 @@ const WordGrid = (props) => {
         justifyContent: 'center'
     };
 
-    const rowLetter = {
-        alignItems: 'center',
-        display: 'flex',
-        fontSize: '32px',
-        fontWeight: '700',
-        height: '58px',
-        justifyContent: 'center',
-        textTransform: 'uppercase',
-        border: '2px solid hsla(0,0%,100%,.4)',
-        color: '#cdcdcd',
-        padding: '0 13px'
+    const setLetterStyling = (backColor) => {
+        return {
+            alignItems: 'center',
+            display: 'flex',
+            fontSize: '32px',
+            fontWeight: '700',
+            height: '58px',
+            justifyContent: 'center',
+            textTransform: 'uppercase',
+            border: '2px solid hsla(0,0%,100%,.4)',
+            color: '#cdcdcd',
+            padding: '0 13px',
+            backgroundColor: `${backColor}`
+        }
+    }
+
+    const wordBlock = (letter, targetIndex) => {
+        console.log(letter);
+        const { targetWord } = props.config;
+        if (targetWord[targetIndex] === letter){
+            return <div style={setLetterStyling('green')}>{letter}</div>;
+        }else if (targetWord.includes(letter)){
+            return <div style={setLetterStyling('gray')}>{letter}</div>;
+        }
+        return <div style={setLetterStyling('white')}>{letter}</div>;
     }
 
     const renderRow = (word) => {
-        const rowLetters = word.split('').map((letter) => 
-            <div style={rowLetter}>{letter}</div>
+        const rowLetters = word.split('').map((letter, index) => 
+            wordBlock(letter, index)
         );
         return rowLetters;
     }
