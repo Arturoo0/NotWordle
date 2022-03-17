@@ -37,7 +37,6 @@ const WordGrid = (props) => {
     }
 
     const renderRows = () => {
-        const { wordLength } = props.config; 
         const rows = enteredWords.map((word) => 
             <div style={rowStyle}>{renderRow(word)}</div>
         );
