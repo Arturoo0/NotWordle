@@ -7,7 +7,8 @@ const Auth = () => {
         width: '100vw',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#112D4E'
     };
 
     return (

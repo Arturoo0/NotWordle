@@ -13,6 +13,10 @@ const AuthForm = () => {
         marginTop: '8px' 
     };
 
+    const authTypeStyle = {
+        display: 'flex'
+    };
+
     const handleUserSumbmission = async () => {
         const userCredentials = { 
             'email' : email, 
@@ -52,6 +56,15 @@ const AuthForm = () => {
         );
         return inputs;
     };
+
+    const renderAuthTypeSelections = () => {
+        return (
+            <div style={authTypeStyle}>
+                <div onChange={() => setAuthType('login')}>Login</div>
+                <div onChange={() => setAuthType('signup')}>Signup</div>
+            </div>
+        );
+    }
 
     return (
         <div>
