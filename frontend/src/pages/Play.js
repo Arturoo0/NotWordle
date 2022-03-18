@@ -4,14 +4,7 @@ import { get } from '../utils/baseRequest.js';
 
 const Play = () => {
     const [targetWord, setTargetWord] = useState(null);
-    useEffect(() => {
-        const fetchTargetWord = async () => {
-            const response = await get('/words/word', {});
-            setTargetWord(response.data);
-        }
-        fetchTargetWord();
-    }, []);
-
+    const [reload, triggerReload] = useState(false);
     const playContainerStyle = {
         height: '100vh',
         width: '100vw',
@@ -19,14 +12,22 @@ const Play = () => {
         justifyContent: 'center',
         alignItems: 'center'
     };
+    useEffect(() => {
+        const fetchTargetWord = async () => {
+            const response = await get('/words/word', {});
+            setTargetWord(response.data);
+        }
+        fetchTargetWord();
+    }, [reload]);
 
     const handleGameOver = (postGameInfo) => {
         console.log(postGameInfo);
+        triggerReload(!reload);
     };
 
     return (
         <div style={playContainerStyle}>
-            <WordGrid config={{
+            <WordGrid key={targetWord} config={{
                 wordLength: 5,
                 targetWord: targetWord, 
                 gameOver: handleGameOver 
