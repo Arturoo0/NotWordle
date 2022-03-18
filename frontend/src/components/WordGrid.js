@@ -74,9 +74,10 @@ const WordGrid = (props) => {
             return;
         }
         if (targetWord === currentWordEntry){
+            setEnteredWords([...enteredWords, ...[currentWordEntry]]);
             gameOver(generatePostGameInfo(true));
             setIsCurrentGame(false);
-            isWinner(true);
+            setIsWinner(true);
             return;
         }
         const response = await get(`/words/is-valid-word/${currentWordEntry}`, {});

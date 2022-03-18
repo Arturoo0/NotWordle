@@ -36,7 +36,6 @@ const Play = () => {
                 targetWord: targetWord, 
                 gameOver: handleGameOver,
                 nextGame: handleNextGame
-
             }}/>
         </div>
     );

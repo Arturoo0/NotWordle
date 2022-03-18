@@ -6,6 +6,7 @@ const authentication = async (req, res, next) => {
     if (!session){  
         return res.status(401).send('Unathorized to access requested content.');
     } 
+    req.emailIdentifier = session.associatedSessionEmail;
     next();
 };
 

@@ -2,14 +2,25 @@ const express = require('express');
 const authetication = require('../middleware/authentication.js');
 const { User } = require('../models/User.js');
 const wordsRouter = express.Router();
+const { v4: uuidv4 } = require('uuid');
 
 const words = require('../utils/words.js');
 
 wordsRouter.use(authetication);
 
-wordsRouter.get('/word', (req, res) => {
+wordsRouter.get('/word', async (req, res) => {
     const arrayOfWords = words.arrayOfWords;
     const word = arrayOfWords[Math.floor(Math.random() * arrayOfWords.length)];
+    
+    const query = { email: req.emailIdentifier };
+    const gameInfo = {
+        gameId: uuidv4(),
+        targetWord: word
+    }
+    const user = await User.findOneAndUpdate(
+        query,
+        { $push: {games: gameInfo} }
+    );
     return res.send(word);
 });
 
