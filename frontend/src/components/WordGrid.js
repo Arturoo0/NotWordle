@@ -7,7 +7,7 @@ const WordGrid = (props) => {
     const [enteredWords, setEnteredWords] = useState([]);
     const [isCurrentGame, setIsCurrentGame] = useState(true);
     const [isWinner, setIsWinner] = useState(false);
-    const { targetWord, gameOver } = props.config;
+    const { targetWord, gameOver, nextGame } = props.config;
     const gridStyle = {
         display: 'flex',
         flexDirection: 'column',
@@ -91,8 +91,13 @@ const WordGrid = (props) => {
     }
 
     const renderPostGame = () => {
-        if (!isCurrentGame) return <Button>Next</Button>
+        if (!isCurrentGame){
+            return <Button onClick={() => {
+                nextGame()
+            }}>Next</Button>; 
+        } 
     };
+
 
     const renderWordInput = () => {
         if (isCurrentGame){
