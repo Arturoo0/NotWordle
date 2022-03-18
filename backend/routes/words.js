@@ -1,7 +1,10 @@
 const express = require('express');
+const authetication = require('../middleware/authentication.js');
 const wordsRouter = express.Router();
 
 const words = require('../utils/words.js');
+
+wordsRouter.use(authetication);
 
 wordsRouter.get('/word', (req, res) => {
     const arrayOfWords = words.arrayOfWords;
