@@ -20,11 +20,16 @@ const Play = () => {
         alignItems: 'center'
     };
 
+    const handleGameOver = (postGameInfo) => {
+        console.log(postGameInfo);
+    };
+
     return (
         <div style={playContainerStyle}>
             <WordGrid config={{
                 wordLength: 5,
-                targetWord: targetWord
+                targetWord: targetWord, 
+                gameOver: handleGameOver 
             }}/>
         </div>
     );

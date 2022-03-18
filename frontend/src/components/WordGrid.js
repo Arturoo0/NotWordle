@@ -7,7 +7,7 @@ const WordGrid = (props) => {
     const [enteredWords, setEnteredWords] = useState([]);
     const [isCurrentGame, setIsCurrentGame] = useState(true);
     const [isWinner, setIsWinner] = useState(false);
-    const { targetWord } = props.config;
+    const { targetWord, gameOver } = props.config;
     const gridStyle = {
         display: 'flex',
         flexDirection: 'column',
@@ -36,6 +36,10 @@ const WordGrid = (props) => {
             backgroundColor: `${backColor}`
         }
     }
+
+    const generatePostGameInfo = (_isWinner) => {
+        return { isWinner: _isWinner };
+    };
 
     const wordBlock = (letter, targetIndex) => {
         if (targetWord[targetIndex] === letter){
@@ -70,6 +74,7 @@ const WordGrid = (props) => {
             return;
         }
         if (targetWord === currentWordEntry){
+            gameOver(generatePostGameInfo(true));
             setIsCurrentGame(false);
             isWinner(true);
             return;
@@ -80,6 +85,7 @@ const WordGrid = (props) => {
         }else if (enteredWords.length < 6){
             setEnteredWords([...enteredWords, ...[currentWordEntry]]);
         }else{
+            gameOver(generatePostGameInfo(false))
             setIsCurrentGame(false);
         }
     }
