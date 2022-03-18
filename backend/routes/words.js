@@ -1,5 +1,6 @@
 const express = require('express');
 const authetication = require('../middleware/authentication.js');
+const { User } = require('../models/User.js');
 const wordsRouter = express.Router();
 
 const words = require('../utils/words.js');
