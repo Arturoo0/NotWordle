@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import WordGrid from '../components/WordGrid';
+import { WordGrid } from '../components';
 import { get } from '../utils/baseRequest.js';
 
 const Play = () => {
