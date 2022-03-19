@@ -21,7 +21,11 @@ const Play = () => {
     }, [reload]);
 
     const handleGameOver = (postGameInfo) => {
-        console.log(postGameInfo);
+        // upload user game info
+        return null;
+    };
+
+    const handleNextGame = () => {
         triggerReload(!reload);
     };
 
@@ -30,7 +34,8 @@ const Play = () => {
             <WordGrid key={targetWord} config={{
                 wordLength: 5,
                 targetWord: targetWord, 
-                gameOver: handleGameOver 
+                gameOver: handleGameOver,
+                nextGame: handleNextGame
             }}/>
         </div>
     );

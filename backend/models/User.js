@@ -20,6 +20,10 @@ const UserSchema = new Schema(
         id: {
             type: String,
             default: uuidv4()
+        },
+        games: {
+            type: Array,
+            default: []
         }
     },
     { collection: 'users' }

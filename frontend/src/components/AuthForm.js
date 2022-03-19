@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Card } from 'react-bootstrap';
 import { post } from '../utils/baseRequest.js';
 
 const AuthForm = () => {
@@ -7,6 +7,15 @@ const AuthForm = () => {
     const [ username, setUsername ] = useState(null);
     const [ password, setPassword ] = useState(null);
     const [ authType, setAuthType ] = useState('login');
+
+    const formStyle = {
+        padding: '10px 30px',
+        marginTop: '8px' 
+    };
+
+    const authTypeStyle = {
+        display: 'flex'
+    };
 
     const handleUserSumbmission = async () => {
         const userCredentials = { 
@@ -48,18 +57,29 @@ const AuthForm = () => {
         return inputs;
     };
 
+    const renderAuthTypeSelections = () => {
+        return (
+            <div style={authTypeStyle}>
+                <div onChange={() => setAuthType('login')}>Login</div>
+                <div onChange={() => setAuthType('signup')}>Signup</div>
+            </div>
+        );
+    }
+
     return (
         <div>
             <Form.Select onChange={(event) => setAuthType(event.target.value)}>
                 <option value='login'>Login</option>
                 <option value='signup'>Signup</option>
             </Form.Select>
-            {renderFormInputs()}
-            <p/>
-            <Button 
-                variant="primary" 
-                onClick={() => {handleUserSumbmission()}}
-            >Submit</Button>{' '}
+            <Card style={formStyle}>
+                {renderFormInputs()}
+                <p/>
+                <Button 
+                    variant="primary" 
+                    onClick={() => {handleUserSumbmission()}}
+                >Submit</Button>{' '}
+            </Card>
         </div>
     )
 };
