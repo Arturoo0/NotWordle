@@ -11,13 +11,13 @@ wordsRouter.use(authetication);
 wordsRouter.get('/word', async (req, res) => {
     const arrayOfWords = words.arrayOfWords;
     const word = arrayOfWords[Math.floor(Math.random() * arrayOfWords.length)];
-    
+
     const query = { email: req.emailIdentifier };
     const gameInfo = {
         gameId: uuidv4(),
         targetWord: word
     }
-    const user = await User.findOneAndUpdate(
+    await User.findOneAndUpdate(
         query,
         { $push: {games: gameInfo} }
     );
