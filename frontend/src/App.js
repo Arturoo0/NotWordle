@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Play from './pages/Play.js';
 import Auth from './pages/Auth.js';
 import { get } from './utils/baseRequest.js';
 import { useState, useEffect } from 'react';
@@ -23,7 +24,7 @@ const App = () => {
       return (
         <BrowserRouter>
           <Routes>
-            <Route path='/'/>
+            <Route path='/' element={<Play />}/>
           </Routes>
         </BrowserRouter>
       );

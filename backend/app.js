@@ -4,9 +4,10 @@ const cors = require('cors');
 const express = require('express'); 
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+const words = require('./utils/words.js');
 
 const authRouter = require('./routes/auth.js');
-
+const wordRouter = require('./routes/words.js')
 const appStartTime = Date.now();
 
 const appCore = async () => {
@@ -37,6 +38,7 @@ const startApp = async () => {
   app.use(express.json()); 
 
   app.use('/auth', authRouter);
+  app.use('/words', wordRouter);
 
   app.get('/', (req, res) => {
     const status = {
@@ -51,3 +53,4 @@ const startApp = async () => {
 }
 
 startApp();
+
