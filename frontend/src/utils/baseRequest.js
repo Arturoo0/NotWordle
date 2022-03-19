@@ -42,7 +42,7 @@ const post = async (endpoint, body) => {
             headers: {
                 'Content-Type': 'application/json',
                 'withCredentials': true,
-                'credentials': include
+                'credentials': 'include'
             } 
         });
         return res;
