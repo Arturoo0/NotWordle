@@ -2,6 +2,7 @@ import React from 'react';
 import { AuthForm } from '../components';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { BsFileEarmarkWord } from "react-icons/bs";
 
 const Auth = () => {
     const navigate = useNavigate();
@@ -16,7 +17,11 @@ const Auth = () => {
     };
 
     return (
-        <div style={AuthPageContainer}> 
+        <div style={AuthPageContainer}>
+            <BsFileEarmarkWord style={{
+                color: 'white',
+                fontSize: '8em'
+            }}/>
             <AuthForm />
             <Button
                 onClick={(event) => {
