@@ -87,6 +87,7 @@ const WordGrid = (props) => {
         }else if (enteredWords.length < 6){
             setEnteredWords([...enteredWords, ...[currentWordEntry]]);
         }else{
+            alert(`Correct word was '${targetWord}'`);
             gameOver(generatePostGameInfo(false))
             setIsCurrentGame(false);
         }
