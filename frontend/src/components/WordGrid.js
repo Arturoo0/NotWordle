@@ -65,7 +65,7 @@ const WordGrid = (props) => {
     };
 
     const handleWordInput = (event) => {
-        setCurrentWordEntry(event.target.value);
+        setCurrentWordEntry(event.target.value.toLowerCase());
     };
 
     const handleWordSubmit = async () => {
