@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
-const baseReqPath = 'http://localhost:3000';
+const baseReqPath = 'https://api-not-wordle.herokuapp.com/';
 
 const checkPassedEndpoint = (endpoint) => {
     if (endpoint === undefined){
