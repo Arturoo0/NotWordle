@@ -121,7 +121,10 @@ const WordGrid = (props) => {
 
     return (
         <div style={gridStyle}>
-            {(alertMessage) ?  <Alert alertText={alertMessage}/> : null}
+            {(alertMessage) ?  <Alert 
+                alertText={alertMessage}
+                closeAlert= {() => {setAlertMessage(null)}}
+            /> : null}
             {renderRows()}
             {renderWordInput()}
             {renderPostGame()}

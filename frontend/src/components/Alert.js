@@ -13,7 +13,7 @@ const Alert = (props) => {
     return ( 
         <div style={alertStyle}>
             <Toast>
-                <Toast.Header>
+                <Toast.Header onClick={() => props.closeAlert()}>
                     <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
                     <strong className="me-auto">NotWordle</strong>
                 </Toast.Header>
