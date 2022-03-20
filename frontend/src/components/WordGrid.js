@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Container, Col, Row, Form, Button } from 'react-bootstrap';
 import { get } from '../utils/baseRequest.js';
+import { Alert } from '.';
 
 const WordGrid = (props) => {
     const [currentWordEntry, setCurrentWordEntry] = useState(null);
     const [enteredWords, setEnteredWords] = useState([]);
     const [isCurrentGame, setIsCurrentGame] = useState(true);
     const [isWinner, setIsWinner] = useState(false);
+    const [alertMessage, setAlertMessage] = useState(null);
     const { targetWord, gameOver, nextGame } = props.config;
     const gridStyle = {
         display: 'flex',
@@ -69,9 +71,10 @@ const WordGrid = (props) => {
     };
 
     const handleWordSubmit = async () => {
+        setAlertMessage(null);
         const expectedWordLength = 5;
         if (currentWordEntry.length !== expectedWordLength){
-            alert(`Provided word is not ${expectedWordLength} characters`);
+            setAlertMessage(`Provided word is not ${expectedWordLength} characters`);
             return;
         }
         if (targetWord === currentWordEntry){
@@ -83,11 +86,11 @@ const WordGrid = (props) => {
         }
         const response = await get(`/words/is-valid-word/${currentWordEntry}`, {});
         if (!response.data){
-            alert('Provided word is not in the word list')
+            setAlertMessage('Provided word is not in the word list');
         }else if (enteredWords.length < 6){
             setEnteredWords([...enteredWords, ...[currentWordEntry]]);
         }else{
-            alert(`Correct word was '${targetWord}'`);
+            setAlertMessage(`Correct word was '${targetWord}'`)
             gameOver(generatePostGameInfo(false))
             setIsCurrentGame(false);
         }
@@ -118,6 +121,10 @@ const WordGrid = (props) => {
 
     return (
         <div style={gridStyle}>
+            {(alertMessage) ?  <Alert 
+                alertText={alertMessage}
+                closeAlert= {() => {setAlertMessage(null)}}
+            /> : null}
             {renderRows()}
             {renderWordInput()}
             {renderPostGame()}
