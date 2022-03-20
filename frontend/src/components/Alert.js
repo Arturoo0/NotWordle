@@ -1,5 +1,6 @@
 import React from 'react';
 import { Toast } from 'react-bootstrap';
+import { BsFileEarmarkWord } from "react-icons/bs";
 
 const Alert = (props) => {
     const alertStyle = {
@@ -14,7 +15,7 @@ const Alert = (props) => {
         <div style={alertStyle}>
             <Toast>
                 <Toast.Header onClick={() => props.closeAlert()}>
-                    <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                    <BsFileEarmarkWord style={{marginRight: '10px'}} />
                     <strong className="me-auto">NotWordle</strong>
                 </Toast.Header>
                 <Toast.Body>{props.alertText}</Toast.Body>
