@@ -6,21 +6,22 @@ const { v4: uuidv4 } = require('uuid');
 
 const words = require('../utils/words.js');
 
-wordsRouter.use(authetication);
-
 wordsRouter.get('/word', async (req, res) => {
     const arrayOfWords = words.arrayOfWords;
     const word = arrayOfWords[Math.floor(Math.random() * arrayOfWords.length)];
 
-    const query = { email: req.emailIdentifier };
-    const gameInfo = {
-        gameId: uuidv4(),
-        targetWord: word
+    const { sessionID } = req.cookies;
+    if ( sessionID ){
+        const query = { email: req.emailIdentifier };
+        const gameInfo = {
+            gameId: uuidv4(),
+            targetWord: word
+        }
+        await User.findOneAndUpdate(
+            query,
+            { $push: {games: gameInfo} }
+        );
     }
-    await User.findOneAndUpdate(
-        query,
-        { $push: {games: gameInfo} }
-    );
     return res.send(word);
 });
 
