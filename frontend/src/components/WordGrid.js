@@ -39,22 +39,39 @@ const WordGrid = (props) => {
         }
     }
 
+    const mapWordFrequencies = (word) => {
+        let _map = {};
+        [...word].forEach((letter) => {
+            (letter in _map) ? _map[letter] += 1 : _map[letter] = 1;
+        }); 
+        return _map;
+    };
+
     const generatePostGameInfo = (_isWinner) => {
         return { isWinner: _isWinner };
     };
 
-    const wordBlock = (letter, targetIndex) => {
-        if (targetWord[targetIndex] === letter){
-            return <div style={setLetterStyling('green')}>{letter}</div>;
-        }else if (targetWord.includes(letter)){
-            return <div style={setLetterStyling('gray')}>{letter}</div>;
-        }
-        return <div style={setLetterStyling('white')}>{letter}</div>;
+    const wordBlock = (letter, color) => {
+        return <div style={setLetterStyling(color)}>{letter}</div>;
     }
 
     const renderRow = (word) => {
-        const rowLetters = word.split('').map((letter, index) => 
-            wordBlock(letter, index)
+        let associatedWordColors = [...Array(5)];
+        const targetWordFrequencies = mapWordFrequencies(targetWord);
+        [...word].forEach((letter, index) => {
+            if (letter === targetWord[index]){
+                associatedWordColors[index] = 'green';
+                targetWordFrequencies[letter] -= 1;
+            } 
+        });
+        [...word].forEach((letter, index) => {
+            if (targetWord.includes(letter) && targetWordFrequencies[letter] > 0){
+                associatedWordColors[index] = 'gray';
+                targetWordFrequencies[letter] -= 1;
+            }
+        });
+        const rowLetters = associatedWordColors.map((wordColor, index) => 
+            wordBlock(word[index], wordColor)
         );
         return rowLetters;
     }
