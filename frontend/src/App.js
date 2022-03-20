@@ -33,6 +33,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Auth />} />
+          <Route path='/free-play' element={<Play />}/>
         </Routes>
       </BrowserRouter>
     );
