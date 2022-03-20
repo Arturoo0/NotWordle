@@ -69,8 +69,9 @@ const WordGrid = (props) => {
     };
 
     const handleWordSubmit = async () => {
-        if (currentWordEntry.length > 5){
-            alert('Provided word is greater than 5 characters');
+        const expectedWordLength = 5;
+        if (currentWordEntry.length !== expectedWordLength){
+            alert(`Provided word is not ${expectedWordLength} characters`);
             return;
         }
         if (targetWord === currentWordEntry){
