@@ -32,8 +32,9 @@ const AuthForm = () => {
                 res = await post('/auth/sign-up', userCredentials);
                 break;
         }
-        const { error, message } = res.data;
-        (error) ? alert(error) : alert(message);  
+        const { error, message, sessionId } = res.data;
+        (error || !sessionId) ? alert(error) : alert(message);  
+        localStorage.setItem('sessionId', sessionId);
         return null;
     };
 

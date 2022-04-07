@@ -45,7 +45,15 @@ const includeAndSaveSessionCookie = async (res, email) => {
     await newSession.save();
     res.header('Access-Control-Allow-Credentials', true);
     res.cookie('sessionID', newSessionIdentifier);
+    return newSessionIdentifier;
 };  
+
+const authSuccess = (msg, _sessionId) => {
+    return {
+        message: msg, 
+        sessionId: _sessionId 
+    };
+};
 
 authRouter.post('/login', async (req, res) => {
     if (validateUserCredentials(req.body).error){
@@ -67,10 +75,8 @@ authRouter.post('/login', async (req, res) => {
     if (!doesUsernameMatch || !doesPasswordMatch){
         return res.send(errorMessages.credentialMismatchProvided());
     }
-    await includeAndSaveSessionCookie(res, email);
-    return res.send({
-        message: 'Succesfully logged in.'
-    });
+    const sessionId = await includeAndSaveSessionCookie(res, email);
+    return res.send(authSuccess('Successfully signed in.', sessionId));
 });
 
 authRouter.post('/sign-up', async (req, res) => {
@@ -101,10 +107,8 @@ authRouter.post('/sign-up', async (req, res) => {
     });
 
     await newUser.save();
-    await includeAndSaveSessionCookie(res, email);
-    return res.send({
-        message: 'Succesfully created an account.' 
-    });
+    const sessionId = await includeAndSaveSessionCookie(res, email);
+    return res.send(authSuccess('Successfully signed up.', sessionId));
 });
 
 authRouter.get('/is-valid-session', async (req, res) => {
