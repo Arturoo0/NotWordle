@@ -28,7 +28,7 @@ const startApp = async () => {
   const app = express();
 
   app.use(cors({
-    origin: 'http://localhost:8000',
+    origin: 'https://zealous-poitras-de38e5.netlify.app',
     credentials: true 
   }));
   app.use(cookieParser());
