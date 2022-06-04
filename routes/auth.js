@@ -113,6 +113,7 @@ authRouter.post('/sign-up', async (req, res) => {
 
 authRouter.get('/is-valid-session', async (req, res) => {
     let associatedUsername;
+    console.log(req.body)
     const { sessionId } = req.body;
     console.log(sessionId);  
     const currentSession = await Session.findOne({
