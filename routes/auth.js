@@ -122,6 +122,10 @@ authRouter.get('/is-valid-session', async (req, res) => {
         });
     }   
 
+    console.log({
+        isValidSession: currentSession ? true : false,
+        username: (currentSession && associatedUsername) ? associatedUsername.username : null
+    });
     return res.send({
         isValidSession: currentSession ? true : false,
         username: (currentSession && associatedUsername) ? associatedUsername.username : null
