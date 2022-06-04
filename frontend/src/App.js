@@ -12,7 +12,7 @@ const App = () => {
   useEffect(() => {
     const checkAuth = async () => {
       const response = await get('/auth/is-valid-session', {
-        sessionId: localStorage.getItem('sessionId')
+        sessionId: await localStorage.getItem('sessionId')
       });
       const { username, isValidSession } = response.data;
       setLoggedIn(isValidSession);
