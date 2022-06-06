@@ -2,6 +2,8 @@ const express = require('express');
 
 const userRouter = express.Router();
 
-userRouter.saveGame('/save-game-result', (req, res) => {
-    console.log('hit');
+userRouter.post('/save-game-result', async (req, res) => {
+    console.log(req.body);
 });
+
+module.exports = userRouter;
