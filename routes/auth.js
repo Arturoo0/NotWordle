@@ -10,7 +10,7 @@ const authRouter = express.Router();
 
 const saltRounds = 10;
 
-const userSchema = joi.object({
+const userValidationSchema = joi.object({
     email: joi.string()
         .email()
         .required(), 
@@ -24,7 +24,7 @@ const userSchema = joi.object({
 })
 
 const validateUserCredentials = (credentials) => {
-    const userValidation = userSchema.validate(credentials);
+    const userValidation = userValidationSchema.validate(credentials);
     const {
         value: credentialsObject, 
         error: _error

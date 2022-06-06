@@ -9,7 +9,7 @@ const checkPassedEndpoint = (endpoint) => {
     }
 }
 
-const get = async (endpoint, body) => {
+const get = async (endpoint, body, sessionToken=null) => {
     checkPassedEndpoint(endpoint);
     const reqPath = baseReqPath + endpoint;
     try {
@@ -19,7 +19,8 @@ const get = async (endpoint, body) => {
             data: body,
             headers: {
                 'Content-Type': 'application/json',
-                'withCredentials': true 
+                'withCredentials': true,
+                'sessionTokenId': sessionToken
             }
         });
         return res;
@@ -31,7 +32,7 @@ const get = async (endpoint, body) => {
     }
 }
 
-const post = async (endpoint, body) => {
+const post = async (endpoint, body, sessionToken=null) => {
     checkPassedEndpoint(endpoint);
     const reqPath = baseReqPath + endpoint;
     try {
@@ -42,7 +43,8 @@ const post = async (endpoint, body) => {
             headers: {
                 'Content-Type': 'application/json',
                 'withCredentials': true,
-                'credentials': 'include'
+                'credentials': 'include',
+                'sessionTokenId': sessionToken
             } 
         });
         return res;
