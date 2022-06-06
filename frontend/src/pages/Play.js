@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { WordGrid } from '../components';
-import { get } from '../utils/baseRequest.js';
+import { get, post } from '../utils/baseRequest.js';
 
 const Play = () => {
     const [targetWord, setTargetWord] = useState(null);
@@ -20,9 +20,12 @@ const Play = () => {
         fetchTargetWord();
     }, [reload]);
 
-    const handleGameOver = (postGameInfo) => {
-        // upload user game info
-        return null;
+    const handleGameOver = async (postGameInfo) => {
+        const sessionIdentifier = await localStorage.getItem('sessionId');
+        await post('/user/save-game-result', 
+            {...postGameInfo, ...{sessionTokenId: sessionIdentifier}},
+            sessionIdentifier
+        );
     };
 
     const handleNextGame = () => {
