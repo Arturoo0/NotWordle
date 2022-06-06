@@ -25,7 +25,7 @@ const Play = () => {
         await post('/user/save-game-result', 
             {...postGameInfo, ...{sessionTokenId: sessionIdentifier}},
             sessionIdentifier
-            );
+        );
     };
 
     const handleNextGame = () => {
