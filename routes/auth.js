@@ -111,23 +111,17 @@ authRouter.post('/sign-up', async (req, res) => {
     return res.send(authSuccess('Successfully signed up.', sessionId));
 });
 
-authRouter.get('/is-valid-session', async (req, res) => {
+authRouter.get('/is-valid-session/:sessionToken/', async (req, res) => {
     let associatedUsername;
-    console.log(req.body)
-    const { sessionId } = req.body;
-    console.log(sessionId);  
+    const decodedSession = decodeURI(req.params.sessionToken);
     const currentSession = await Session.findOne({
-        sessionIdentifier: sessionId
+        sessionIdentifier: decodedSession ?? req.cookies.sessionID
     });
     if (currentSession){
         associatedUsername = await User.findOne({
             email: currentSession.associatedSessionEmail
         });
     }   
-    console.log({
-        isValidSession: currentSession ? true : false,
-        username: (currentSession && associatedUsername) ? associatedUsername.username : null
-    });  
     return res.send({
         isValidSession: currentSession ? true : false,
         username: (currentSession && associatedUsername) ? associatedUsername.username : null
