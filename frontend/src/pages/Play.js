@@ -21,8 +21,9 @@ const Play = () => {
     }, [reload]);
 
     const handleGameOver = async (postGameInfo) => {
-        const response = await post('/user/save-game-result', postGameInfo);
-        return null;
+        const sessionIdentifier = await localStorage.getItem('sessionId');
+        await post('/user/save-game-result', 
+            {...postGameInfo, ...{sessionTokenId: sessionIdentifier}});
     };
 
     const handleNextGame = () => {
