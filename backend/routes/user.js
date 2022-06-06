@@ -15,7 +15,7 @@ const userGameSchema = joi.object({
 userRouter.post('/save-game-result', async (req, res) => {
     const gameInfo = req.body;
     console.log(gameInfo);
-    const { value, error } = userGameSchema.validate(gameInfo);
+    const { error } = userGameSchema.validate(gameInfo);
     if (!error){
         const session = await Session.findOne({
             sessionIdentifier: gameInfo.sessionTokenId
