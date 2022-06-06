@@ -3,7 +3,10 @@ const joi = require('joi');
 
 const { User } = require('../models/User.js');
 const { Session } = require('../models/Session.js');
+const authentication = require('../middleware/authentication.js');
 const userRouter = express.Router();
+
+userRouter.use(authentication);
 
 const userGameSchema = joi.object({
     isWinner: joi.boolean()
