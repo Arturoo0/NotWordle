@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HistoryFeed = () => {
+const HistoryFeed = (props) => {
     return (
         <div>
             History feed
