@@ -23,8 +23,7 @@ const Play = () => {
     const handleGameOver = async (postGameInfo) => {
         const sessionIdentifier = await localStorage.getItem('sessionId');
         await post('/user/save-game-result', 
-            {...postGameInfo, ...{sessionTokenId: sessionIdentifier}},
-            sessionIdentifier
+            {...postGameInfo, ...{sessionTokenId: sessionIdentifier}}
         );
     };
 
