@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Play from './pages/Play.js';
 import Auth from './pages/Auth.js';
+import History from './pages/History.js';
 import { get } from './utils/baseRequest.js';
 import { useState, useEffect } from 'react';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
@@ -26,6 +27,7 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Play />}/>
+            <Route path='/history' element={<History />}/>
           </Routes>
         </BrowserRouter>
       );
