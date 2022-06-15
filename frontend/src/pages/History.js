@@ -4,17 +4,25 @@ import { get } from '../utils/baseRequest.js';
 
 const History = () => {
     const [history, setHistory] = useState(null);
+    const historyFeedPositioning = {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center', 
+        flexDirection: 'column',
+        height: '100vh'
+    };
     useEffect(() => {
         const fetchHistory = async () => {
             const response = await get('/user/fetch-history', {});
-            console.log(response);
+            setHistory(response.data.history);
         };
         fetchHistory();
     }, []);
 
     return (
-        <div>
-            <HistoryFeed />
+        <div style={historyFeedPositioning}>
+            <p1>History</p1>
+            <HistoryFeed gameHistory={history}/>
         </div>
     )
 };
