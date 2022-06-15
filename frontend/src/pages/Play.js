@@ -16,7 +16,7 @@ const Play = () => {
         const fetchTargetWord = async () => {
             const response = await get('/words/word', {});
             setTargetWord(response.data);
-        }
+        };
         fetchTargetWord();
     }, [reload]);
 

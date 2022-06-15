@@ -26,7 +26,7 @@ const App = () => {
       return (
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<Play />}/>
+            <Route exact path='/' element={<Play />}/>
             <Route path='/history' element={<History />}/>
           </Routes>
         </BrowserRouter>
