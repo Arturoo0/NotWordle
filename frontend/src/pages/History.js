@@ -5,10 +5,11 @@ import { get } from '../utils/baseRequest.js';
 const History = () => {
     const [history, setHistory] = useState(null);
     useEffect(() => {
-        const fetchHistory = () => {
-            const response = get('/user/fetch-history', {});
+        const fetchHistory = async () => {
+            const response = await get('/user/fetch-history', {});
             console.log(response);
         };
+        fetchHistory();
     }, []);
 
     return (

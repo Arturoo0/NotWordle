@@ -31,7 +31,9 @@ userRouter.post('/save-game-result', async (req, res) => {
 });
 
 userRouter.get('/fetch-history', async (req, res) => {
-    return res.send('User history in progress');
+    return res.send({
+        history: []
+    });
 }); 
 
 module.exports = userRouter;
