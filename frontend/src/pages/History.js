@@ -1,9 +1,10 @@
 import React from 'react';
+import { HistoryFeed } from '../components';
 
 const History = () => {
     return (
         <div>
-            History page
+            <HistoryFeed />
         </div>
     )
 };
