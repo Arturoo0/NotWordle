@@ -48,7 +48,10 @@ const WordGrid = (props) => {
     };
 
     const generatePostGameInfo = (_isWinner) => {
-        return { isWinner: _isWinner };
+        return { 
+            isWinner: _isWinner,
+            word: targetWord
+        };
     };
 
     const wordBlock = (letter, color) => {

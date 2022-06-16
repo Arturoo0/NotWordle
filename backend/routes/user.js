@@ -12,6 +12,8 @@ const userGameSchema = joi.object({
     isWinner: joi.boolean()
         .required(), 
     sessionTokenId: joi.string()
+        .required(),
+    targetWord: joi.string()
         .required()
 })
 
