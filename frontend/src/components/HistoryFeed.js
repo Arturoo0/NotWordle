@@ -7,10 +7,11 @@ const HistoryFeed = (props) => {
         const history = props.gameHistory.map((game) => {
             return (
                 <tr>
-                    <td>-</td>
+                    <td>{game.word}</td>
                     <td>
                         {(game.isWinner) ? 'Won' : 'Loss'}
                     </td>
+                    <td>{game.timeTaken}</td>
                     <td>-</td>
                 </tr>   
             );            
@@ -21,6 +22,7 @@ const HistoryFeed = (props) => {
                     <tr>
                         <th>Word</th>
                         <th>Win/Loss</th>
+                        <th>Time taken (seconds)</th>
                         <th>Win Percentage</th>
                     </tr>
                 </thead>

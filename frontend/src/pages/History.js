@@ -9,7 +9,9 @@ const History = () => {
         alignItems: 'center',
         justifyContent: 'center', 
         flexDirection: 'column',
-        height: '100vh'
+        height: '100vh',
+        padding: '0 10% 0 10%',
+        backgroundColor: '#2c3034'
     };
     useEffect(() => {
         const fetchHistory = async () => {
@@ -21,7 +23,6 @@ const History = () => {
 
     return (
         <div style={historyFeedPositioning}>
-            <p1>History</p1>
             <HistoryFeed gameHistory={history}/>
         </div>
     )
