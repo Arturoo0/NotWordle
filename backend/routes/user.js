@@ -14,6 +14,8 @@ const userGameSchema = joi.object({
     sessionTokenId: joi.string()
         .required(),
     word: joi.string()
+        .required(),
+    timeTaken: joi.number()
         .required()
 })
 

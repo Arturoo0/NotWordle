@@ -37,7 +37,8 @@ const Play = () => {
                 wordLength: 5,
                 targetWord: targetWord, 
                 gameOver: handleGameOver,
-                nextGame: handleNextGame
+                nextGame: handleNextGame,
+                startTime: new Date()
             }}/>
         </div>
     );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Col, Row, Form, Button } from 'react-bootstrap';
 import { get } from '../utils/baseRequest.js';
 import { Alert } from '.';
@@ -10,6 +10,7 @@ const WordGrid = (props) => {
     const [isWinner, setIsWinner] = useState(false);
     const [alertMessage, setAlertMessage] = useState(null);
     const { targetWord, gameOver, nextGame } = props.config;
+
     const gridStyle = {
         display: 'flex',
         flexDirection: 'column',
@@ -48,9 +49,11 @@ const WordGrid = (props) => {
     };
 
     const generatePostGameInfo = (_isWinner) => {
+        const endTime = new Date();
         return { 
             isWinner: _isWinner,
-            word: targetWord
+            word: targetWord,
+            timeTaken: (endTime - props.config.startTime) / 1000
         };
     };
 
