@@ -13,7 +13,7 @@ const userGameSchema = joi.object({
         .required(), 
     sessionTokenId: joi.string()
         .required(),
-    targetWord: joi.string()
+    word: joi.string()
         .required()
 })
 
