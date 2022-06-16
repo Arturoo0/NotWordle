@@ -16,15 +16,14 @@ const Play = () => {
         const fetchTargetWord = async () => {
             const response = await get('/words/word', {});
             setTargetWord(response.data);
-        }
+        };
         fetchTargetWord();
     }, [reload]);
 
     const handleGameOver = async (postGameInfo) => {
         const sessionIdentifier = await localStorage.getItem('sessionId');
         await post('/user/save-game-result', 
-            {...postGameInfo, ...{sessionTokenId: sessionIdentifier}},
-            sessionIdentifier
+            {...postGameInfo, ...{sessionTokenId: sessionIdentifier}}
         );
     };
 
@@ -38,7 +37,8 @@ const Play = () => {
                 wordLength: 5,
                 targetWord: targetWord, 
                 gameOver: handleGameOver,
-                nextGame: handleNextGame
+                nextGame: handleNextGame,
+                startTime: new Date()
             }}/>
         </div>
     );
