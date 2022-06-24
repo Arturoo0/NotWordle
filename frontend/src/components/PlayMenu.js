@@ -10,8 +10,8 @@ const PlayMenu = () => {
     return (
         <div style={playMenuStyling}>
             <MdHistoryEdu style={iconStyling} onClick={(event) => {
-                    event.preventDefault();
-                    navigate('/history');
+                event.preventDefault();
+                navigate('/history');
             }}/>
         </div>
     );
