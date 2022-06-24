@@ -9,7 +9,12 @@ const checkPassedEndpoint = (endpoint) => {
     }
 }
 
-const get = async (endpoint, body, sessionToken=null) => {
+const getSessionToken = async () => {
+    const sessionIdentifier = await localStorage.getItem('sessionId');
+    return sessionIdentifier;
+}
+
+const get = async (endpoint, body) => {
     checkPassedEndpoint(endpoint);
     const reqPath = baseReqPath + endpoint;
     try {
@@ -20,7 +25,7 @@ const get = async (endpoint, body, sessionToken=null) => {
             headers: {
                 'Content-Type': 'application/json',
                 'withCredentials': true,
-                'sessionTokenId': sessionToken
+                'sessionTokenId': await getSessionToken()
             }
         });
         return res;
@@ -32,7 +37,7 @@ const get = async (endpoint, body, sessionToken=null) => {
     }
 }
 
-const post = async (endpoint, body, sessionToken=null) => {
+const post = async (endpoint, body) => {
     checkPassedEndpoint(endpoint);
     const reqPath = baseReqPath + endpoint;
     try {
@@ -44,7 +49,7 @@ const post = async (endpoint, body, sessionToken=null) => {
                 'Content-Type': 'application/json',
                 'withCredentials': true,
                 'credentials': 'include',
-                'sessionTokenId': sessionToken
+                'sessionTokenId': await getSessionToken()
             } 
         });
         return res;
