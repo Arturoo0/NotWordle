@@ -5,7 +5,10 @@ import { useNavigate } from 'react-router-dom';
 const PlayMenu = () => {
     const navigate = useNavigate();   
     const playMenuStyling = { 'marginTop': '20px' }
-    const iconStyling = {'fontSize': '2em'};
+    const iconStyling = {
+        fontSize: '2em',
+        color: 'white'
+    };
     
     return (
         <div style={playMenuStyling}>

@@ -11,7 +11,8 @@ const Play = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center', 
-        flexDirection: 'column'
+        flexDirection: 'column',
+        backgroundColor: 'rgb(44, 48, 52)'
     };
     useEffect(() => {
         const fetchTargetWord = async () => {
@@ -33,15 +34,17 @@ const Play = () => {
     };
 
     return (
-        <div style={playContainerStyle}>
-            <WordGrid key={targetWord} config={{
-                wordLength: 5,
-                targetWord: targetWord, 
-                gameOver: handleGameOver,
-                nextGame: handleNextGame,
-                startTime: new Date()
-            }}/>
-            <PlayMenu />
+        <div>
+            <div style={playContainerStyle}>
+                <WordGrid key={targetWord} config={{
+                    wordLength: 5,
+                    targetWord: targetWord, 
+                    gameOver: handleGameOver,
+                    nextGame: handleNextGame,
+                    startTime: new Date()
+                }}/>
+                <PlayMenu />
+            </div>
         </div>
     );
 };
