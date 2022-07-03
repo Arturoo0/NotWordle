@@ -3,14 +3,13 @@ import { Table } from 'react-bootstrap';
 
 const HistoryFeed = (props) => {
     const renderHistory = () => {
+        console.log(props);
         if (!props.gameHistory) return null;
         const history = props.gameHistory.map((game) => {
             return (
                 <tr>
                     <td>{game.word}</td>
-                    <td>
-                        {(game.isWinner) ? 'Won' : 'Loss'}
-                    </td>
+                    <td>{(game.isWinner) ? 'Won' : 'Loss'}</td>
                     <td>{game.timeTaken}</td>
                     <td>-</td>
                 </tr>   
@@ -23,7 +22,6 @@ const HistoryFeed = (props) => {
                         <th>Word</th>
                         <th>Win/Loss</th>
                         <th>Time taken (seconds)</th>
-                        <th>Win Percentage</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { WordGrid } from '../components';
+import { WordGrid, PlayMenu } from '../components';
 import { get, post } from '../utils/baseRequest.js';
 
 const Play = () => {
@@ -10,7 +10,9 @@ const Play = () => {
         width: '100vw',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center', 
+        flexDirection: 'column',
+        backgroundColor: 'rgb(44, 48, 52)'
     };
     useEffect(() => {
         const fetchTargetWord = async () => {
@@ -32,14 +34,17 @@ const Play = () => {
     };
 
     return (
-        <div style={playContainerStyle}>
-            <WordGrid key={targetWord} config={{
-                wordLength: 5,
-                targetWord: targetWord, 
-                gameOver: handleGameOver,
-                nextGame: handleNextGame,
-                startTime: new Date()
-            }}/>
+        <div>
+            <div style={playContainerStyle}>
+                <WordGrid key={targetWord} config={{
+                    wordLength: 5,
+                    targetWord: targetWord, 
+                    gameOver: handleGameOver,
+                    nextGame: handleNextGame,
+                    startTime: new Date()
+                }}/>
+                <PlayMenu />
+            </div>
         </div>
     );
 };
